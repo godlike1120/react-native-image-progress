@@ -26,7 +26,7 @@ export const createImageProgress = ImageComponent =>
       source: PropTypes.any,
       style: PropTypes.any,
       threshold: PropTypes.number.isRequired,
-        borderRadius: PropTypes.number,
+        borderStyle: PropTypes.any,
     };
 
     static defaultProps = {
@@ -151,7 +151,7 @@ export const createImageProgress = ImageComponent =>
         source,
         style,
         threshold,
-          borderRadius,
+          borderStyle,
         ...props
       } = this.props;
 
@@ -194,7 +194,7 @@ export const createImageProgress = ImageComponent =>
       }
 
       return (
-        <View style={[style, {borderRadius, overflow: 'hidden'}]} ref={this.handleRef}>
+        <View style={[style, borderStyle]} ref={this.handleRef}>
           <ImageComponent
             {...props}
             key={source && source.uri}
@@ -203,7 +203,7 @@ export const createImageProgress = ImageComponent =>
             onError={this.handleError}
             onLoad={this.handleLoad}
             source={source}
-            style={[StyleSheet.absoluteFill, {borderRadius, overflow: 'hidden'}]}
+            style={[StyleSheet.absoluteFill, borderStyle]}
           />
           {indicatorElement}
           {children}
