@@ -1,3 +1,4 @@
+//TESTTT
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ActivityIndicator, Image, StyleSheet, View } from 'react-native';
@@ -25,6 +26,7 @@ export const createImageProgress = ImageComponent =>
       source: PropTypes.any,
       style: PropTypes.any,
       threshold: PropTypes.number.isRequired,
+        borderRadius: PropTypes.number,
     };
 
     static defaultProps = {
@@ -149,6 +151,7 @@ export const createImageProgress = ImageComponent =>
         source,
         style,
         threshold,
+          borderRadius,
         ...props
       } = this.props;
 
@@ -191,7 +194,7 @@ export const createImageProgress = ImageComponent =>
       }
 
       return (
-        <View style={style} ref={this.handleRef}>
+        <View style={[style, {borderRadius, overflow: 'hidden'}]} ref={this.handleRef}>
           <ImageComponent
             {...props}
             key={source && source.uri}
@@ -200,7 +203,7 @@ export const createImageProgress = ImageComponent =>
             onError={this.handleError}
             onLoad={this.handleLoad}
             source={source}
-            style={StyleSheet.absoluteFill}
+            style={[StyleSheet.absoluteFill, {borderRadius, overflow: 'hidden'}]}
           />
           {indicatorElement}
           {children}
